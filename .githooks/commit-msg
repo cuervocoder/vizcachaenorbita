@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Rule: the first line must have 10 or more words (any format, so IDE/AI-generated messages work).
+# Convention (not enforced): write it in English. Suggested format: type(scope): description
+# Example: feat(web): add site and date selector to the main map screen of the app
+msg=$(head -n 1 "$1")
+
+# Dejar pasar merges y reverts automáticos de Git
+case "$msg" in
+  Merge*|Revert*) exit 0 ;;
+esac
+
+palabras=$(echo "$msg" | wc -w)
+if [ "$palabras" -lt 10 ]; then
+  echo "ERROR: invalid commit message: \"$msg\""
+  echo "The first line has $palabras words, at least 10 are required."
+  echo "Say what you changed and why, so the team understands without opening the code."
+  echo "Example: feat(web): add site and date selector to the main map screen of the app"
+  exit 1
+fi

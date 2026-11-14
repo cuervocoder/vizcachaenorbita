@@ -1,0 +1,7 @@
+numpy
+requests
+rasterio
+pyproj
+matplotlib
+pytest
+jsonschema
